@@ -222,12 +222,12 @@
 }
 
 .navbar-content{
-  max-width:1280px;
+  max-width:1280px !important;
   margin:auto;
 }
 
 .body-content{
-  max-width:1280px;
+  max-width:1280px !important;
   margin:auto;
   margin-top:18px;
 }
