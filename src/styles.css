@@ -201,6 +201,19 @@
   }
 }
 
+.form-button{
+  margin: 24px;
+  text-align: center;
+}
+
+.btn-save{
+  width: 240px;
+}
+
+.color-red{
+  color: rgb(255, 115, 115);
+}
+
 .privacy-notice {
   cursor: pointer;
 } 
@@ -230,6 +243,17 @@
   max-width:1280px !important;
   margin:auto;
   margin-top:18px;
+}
+
+.btn-new{
+  float:right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.input-error-message{
+  color: rgb(255, 115, 115);
+  margin:4px;
 }
 
 body {
