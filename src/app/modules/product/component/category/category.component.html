@@ -15,6 +15,11 @@
         </div>
       </div>
       <div class="card-body">
+        @if(categories.length == 0){
+          <div class="text-center table-empty">
+              <h4>No cuentas con categorias registradas</h4>
+          </div>
+        }@else {
         <table class="table table-striped">
           <thead>
             <tr class="table-dark">
@@ -22,6 +27,7 @@
               <th scope="col">category</th>
               <th scope="col">tag</th>
               <th scope="col">status</th>
+              <th scope="col">more</th>
             </tr>
           </thead>
           <tbody>
@@ -39,6 +45,7 @@
 						}
           </tbody>
         </table>
+      }
       </div>
       
       <div class="modal fade modal-lg" id="modalForm" tabindex="-1" role="dialog" data-bs-backdrop="static">

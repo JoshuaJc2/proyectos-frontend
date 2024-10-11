@@ -32,7 +32,18 @@ export class CategoryComponent {
   }
 
   getCategories(){
-    this.categories = this.categoryService.getCategories();
+    // his.loading = true;
+    this.categoryService.getCategories().subscribe({
+      next: (v) => {
+        console.log(v);
+        this.categories = v;
+        // this.= false;
+      },
+      error: (e) => {
+        console.log(e);
+        // this.loading = false;
+      }
+    });
   }
 
   ngOnInit(){
