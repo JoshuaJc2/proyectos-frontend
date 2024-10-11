@@ -8,8 +8,8 @@ export class SwalMessages{
             icon: 'success',
             toast: true,
             text: message,
-            color: '#f2f2f2',
-            background: '#417433',
+            color: '#fff',
+            background: '#697565',
             showConfirmButton: false,
             timer: 2500
         });
