@@ -20,6 +20,9 @@ export class CategoryComponent {
   form:FormGroup;
   swal: SwalMessages = new SwalMessages(); // swal messages
   submitted = false;
+  categoryUpdate:number = 0;
+
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,16 +35,17 @@ export class CategoryComponent {
   }
 
   getCategories(){
-    // his.loading = true;
+    this.loading = true;
     this.categoryService.getCategories().subscribe({
       next: (v) => {
         console.log(v);
         this.categories = v;
-        // this.= false;
+        this.loading= false;
       },
       error: (e) => {
         console.log(e);
-        // this.loading = false;
+        this.swal.errorMessage(e.error!.message);
+        this.loading = false;
       }
     });
   }
@@ -61,15 +65,110 @@ export class CategoryComponent {
     $("#modalForm").modal("hide");
   }
 
+  disableCategory(id:number){
+    this.swal.confirmMessage.fire({
+      title: "Favor de confirmar la eliminacion"
+    }).then((result) =>{
+      this.categoryService.deleteCategory(id).subscribe({
+        next: (v) => {
+          this.swal.successMessage(v.message);
+          this.getCategories();
+        },
+        error: (e) => {
+          console.log(e);
+          this.swal.errorMessage(e.error.message);
+        }
+      });
+    });
+  }
+
+  enableCategory(id:number){
+    this.swal.confirmMessage.fire({
+      title: "Favor de confirmar la activación",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.categoryService.activeCategory(id).subscribe({
+          next: (v) => {
+            this.swal.successMessage(v.message);
+            this.getCategories();
+          },
+          error: (e) => {
+            console.log(e);
+            this.swal.errorMessage(e.error.message);
+          }
+        });
+      }
+    });
+  }
+
   onSubmit(){
+    // validación del formulario 
     this.submitted = true;
-    if(this.form.invalid) return;
+    if(this.form.invalid){return;}
+    this.submitted = false;
+
+    // valida si se está registrando o actualizando una categoria
+    if(this.categoryUpdate == 0){
+      this.onSubmitCreate();
+    }else{
+      this.onSubmitUpdate();
+    }
+    /*
     this.submitted = false;
     let id = this.categories.length + 1;
     let nuevaCat = new Category(id, this.form.controls['category'].value!, this.form.controls['tag'].value!, 1);
     this.categories.push(nuevaCat);
     this.hideModalForm();
     //alert("La categoria ha sido registrada");
-    this.swal.successMessage("La categoria ha sido registrada"); // show message
+    this.swal.successMessage("La categoria ha sido registrada"); // show message*/
+  }
+
+  onSubmitCreate(){
+    this.categoryService.createCategory(this.form.value).subscribe({
+      next: (v) => {
+        this.getCategories();
+        this.hideModalForm();
+        this.resetVariables();
+        this.swal.successMessage(v.message);
+      },
+      error: (e) => {
+        console.log(e);
+        this.swal.errorMessage(e.error.message);
+      }
+    });
+  }
+
+  onSubmitUpdate(){
+    this.categoryService.updateCategory(this.form.value, this.categoryUpdate).subscribe({
+      next: (v) => {
+        this.getCategories();
+        this.hideModalForm();
+        this.resetVariables();
+        this.swal.successMessage(v.message);
+      },
+      error: (e) => {
+        console.log(e);
+        this.swal.errorMessage("No se pudo actualizar la categoria");
+      }
+    });
+  }
+
+  updateCategory(category: Category){
+    this.resetVariables();
+    this.showModalForm();
+
+    this.categoryUpdate = category.category_id;
+    this.form.reset();
+    this.form.controls['category'].setValue(category.category);
+    this.form.controls['tag'].setValue(category.tag);
+
+    this.submitted = false;
+    $("#modalForm").modal("show");
+  }
+
+  resetVariables(){
+    this.form.reset();
+    this.submitted = false;
+    this.categoryUpdate = 0;
   }
 }

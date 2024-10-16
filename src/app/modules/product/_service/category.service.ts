@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Category } from '../_model/category';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { api_dwb_uri } from '../../../shared/api-dwb-uri';
+import { Category } from '../_model/category';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +10,18 @@ import { api_dwb_uri } from '../../../shared/api-dwb-uri';
 export class CategoryService{
   private source = "/category";
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
+
+  activeCategory(categoryId:number):Observable<any>{
+    return this.http.put(api_dwb_uri + this.source + "/" + categoryId + "/activate", null);
+  }
   
   createCategory(category: any): Observable<any>{
     return this.http.post(api_dwb_uri + this.source, category);
+  }
+
+  deleteCategory(categoryId:number): Observable<any>{
+    return this.http.delete(api_dwb_uri + this.source + "/" + categoryId);
   }
 
   getActiveCategories(){
@@ -28,5 +34,9 @@ export class CategoryService{
 
   getCategories() : Observable<any>{
     return this.http.get(api_dwb_uri + this.source);
-  } 
+  }
+  
+  updateCategory(category:Category,categoryId:number) : Observable<any>{
+    return this.http.put(api_dwb_uri + this.source + "/" + categoryId, category);
+  }
 }
