@@ -43,6 +43,18 @@
   width: 240px;
 }
 
+.btn-return{
+  cursor: pointer;
+  margin: 4px 0px 8px 0px !important;
+  max-width: 110px;
+}
+
+
+.btn-return:hover{
+  color: blue;
+}
+
+
 .color-red{
   color: red;
 }
@@ -147,6 +159,38 @@
 .swal-confirm-button{
   width: 120px;
   margin: 12px;
+}
+
+/* Product */
+
+.card-body-product{
+  padding: 16px;
+}
+
+
+.product-image{
+  border-radius: 100%;
+  width: 240px;
+  height: 240px;
+}
+
+
+.edit-product-image{
+  color: blue;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+
+.product-title{
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+
+.btn-edith, .btn-delete{
+  width: 140px;
+  margin-right: 24px;
 }
 
 :root,
