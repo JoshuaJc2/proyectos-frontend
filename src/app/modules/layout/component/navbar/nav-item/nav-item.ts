@@ -1,5 +1,4 @@
 export interface NavItem {
-    displayName?: string;
-    route?: string;
-  }
-  
+  displayName?: string;
+  route?: string;
+}
