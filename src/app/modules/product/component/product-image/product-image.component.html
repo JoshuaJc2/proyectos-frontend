@@ -1,7 +1,6 @@
 <br><br><br><br>
-<p>product-image works!</p>
 <div class="card-header" href="http://localhost:4200/producto/">
-    <div class="btn-return">
+    <div class="btn-return" (click)="redirect('producto')">
         <i class="ph ph-arrow-circle-left"></i>
         Regresar
     </div>
@@ -9,30 +8,38 @@
 <div class="card-body">
     <div class="row">
 
-
         <!-- Product image  -->
    
         <div class="col-md-4">
             <div class="card">
 
               <!-- image  -->
-
+            <!--
               <div class="card-body-product text-center">
-                @if (product.gtin) {
-                    <img src="{{ productImage.image }}" class="product-image">  
+                @if (!productImages) {
+                    <img src="{{ pimages.image }}" class="product-image">
                 }@else {
                     <img src="assets/product-default.png" class="product-image">  
                 }
               </div>
+            -->
+            <div class="grid" (change)="fileChangeHandler($event)">
+                <ng-container *ngFor="let img of productImages">
+                    <button type="button" class="btn btn-danger btn-close my-btn" (click)="deleteProductImage(img.product_image_id)">
+                        <!--<i class="ph ph-trash"></i>-->
+                    </button>
+                    <img src="{{img.image}}" class="product-image">
+                </ng-container>
+            </div>
 
               <!-- button  -->
 
               <div class="text-center">
                   <label for="uploadImage">
                       <input type="file" (change)="fileChangeHandler($event)" id="uploadImage" class="d-none">
-                      <div class="edit-product-image ">
-                        <i class="ph ph-note-pencil icon-text-button"></i>
-                        Editar imagen
+                      <div class="edit-product-image "><br>
+                        <i class="ph ph-plus-circle icon-text-button"></i>
+                        Agregar imagen
                       </div>
                   </label>
               </div>
@@ -83,7 +90,7 @@
                     <!-- buttons  -->
 
 
-                    <button type="button" class="btn btn-primary btn-edith">
+                    <!--<button type="button" class="btn btn-primary btn-edith">
                         <i class="ph ph-note-pencil"></i>
                         Editar
                     </button>
@@ -92,11 +99,10 @@
                     <button type="button" class="btn btn-danger btn-delete">
                         <i class="ph ph-trash"></i>
                         Eliminar
-                    </button>
+                    </button>-->
                 </div>
             </div>
-        </div>
-   
+        </div>   
     </div>
 </div>
 

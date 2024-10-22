@@ -6,13 +6,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '../../_service/category.service';
 import { ProductService } from '../../_service/product.service';
 import { SwalMessages } from '../../../../shared/swal-messages';
+import { ProductImageComponent } from "../product-image/product-image.component";
+import { Router } from '@angular/router';
 
 declare var $:any; // Variable de JQuery
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, ProductImageComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -28,7 +30,8 @@ export class ProductComponent {
   constructor(
     private formBuilder: FormBuilder,
     private categoryService: CategoryService,
-    private productService: ProductService
+    private productService: ProductService,
+    private router : Router,
   ){
     this.form = this.formBuilder.group({
       product: ["", [Validators.required]],
@@ -100,6 +103,18 @@ export class ProductComponent {
     });
   }
 
+  getActiveCategories(){
+    this.categoryService.getActiveCategories().subscribe({
+      next: (v) => {
+        this.categories = v;
+      },
+      error: (e) => {
+        console.log(e);
+        this.swal.errorMessage(e.error!.message); // show message
+      }
+    });
+  }
+
   onSubmit(){
     // validate form
     this.submitted = true;
@@ -126,19 +141,11 @@ export class ProductComponent {
     this.submitted = false;
   }
 
-  hideModalForm(){
-    $("#modalForm").modal("hide");
+  showProduct(gtin : String){
+    this.router.navigate(['producto/' + gtin]);
   }
 
-  getActiveCategories(){
-    this.categoryService.getActiveCategories().subscribe({
-      next: (v) => {
-        this.categories = v;
-      },
-      error: (e) => {
-        console.log(e);
-        this.swal.errorMessage(e.error!.message); // show message
-      }
-    });
+  hideModalForm(){
+    $("#modalForm").modal("hide");
   }
 }

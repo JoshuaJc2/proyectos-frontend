@@ -61,7 +61,7 @@
   
                      <!-- menu options -->
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item">
+                    <a class="dropdown-item" (click)="showProduct(product.gtin)">
                       <i class="ph ph-note-pencil icon-text-ul"></i>Ver Detalles
                     </a>
                     @if (product.status != 0) {
