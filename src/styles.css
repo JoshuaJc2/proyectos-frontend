@@ -19,10 +19,10 @@
   margin-top: 16px;
 }
 
-.navbar-content{
+/*.navbar-content{
   max-width:1280px !important;
   margin:auto;
-}
+}*/
 
 .title-cat{
   padding-top: 12px;
@@ -41,6 +41,11 @@
 
 .btn-save{
   width: 240px;
+}
+
+.btn-return{
+  cursor: pointer;
+  max-width: 180px;
 }
 
 .color-red{

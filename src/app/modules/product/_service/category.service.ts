@@ -24,7 +24,7 @@ export class CategoryService{
     return this.http.delete(api_dwb_uri + this.source + "/" + categoryId);
   }
 
-  getActiveCategories(){
+  getActiveCategories(): Observable <any>{
     return this.http.get(api_dwb_uri + this.source + "/active")
   }
 
