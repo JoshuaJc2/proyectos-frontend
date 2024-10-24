@@ -41,7 +41,7 @@ export class ProductService {
     return this.http.get(api_dwb_uri + this.source + "/category/" + category_id);
   }
 
-  updateProduct(product : String, id : number) : Observable<any>{
+  updateProduct(product : any, id : number) : Observable<any>{
     return this.http.put(api_dwb_uri + this.source + "/" + id, product);
   }
 

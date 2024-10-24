@@ -7,6 +7,9 @@ import { CategoryComponent } from './modules/product/component/category/category
 import { ProductComponent } from './modules/product/component/product/product.component';
 import { ProductImageComponent } from './modules/product/component/product-image/product-image.component';
 import { MainComponent } from './modules/layout/component/main/main.component';
+import { RegionComponent } from './modules/customer/component/region/region.component';
+import { CustomerComponent } from './modules/customer/component/customer/customer.component';
+import { CustomerImageComponent } from './modules/customer/component/customer-image/customer-image.component';
 
 export const routes: Routes = [
     {
@@ -15,7 +18,7 @@ export const routes: Routes = [
     },
     {path: "categoria",
          component: CategoryComponent
-    }, // también puede se "category". Según como quieras mantener tus rutas: en español o en inglés.
+    },
     {
         path:"producto",
         component: ProductComponent
@@ -36,6 +39,18 @@ export const routes: Routes = [
         path: 'secured',
         component: SecuredComponent, 
         canActivate: [authenticationGuard]
+    },
+    {
+        path: 'region',
+        component: RegionComponent
+    },
+    {
+        path: 'cliente',
+        component: CustomerComponent
+    },
+    {
+        path: 'cliente/:rfc',
+        component: CustomerImageComponent
     }
 
 ]

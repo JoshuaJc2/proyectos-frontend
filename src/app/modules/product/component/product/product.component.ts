@@ -24,7 +24,7 @@ export class ProductComponent {
   categories : Category[] = [];
   swal: SwalMessages = new SwalMessages(); // swal messages
   submitted = false;
-  categoryUpdate:number = 0;
+  productUpdate:number = 0;
   loading = false;
 
   constructor(
@@ -120,7 +120,13 @@ export class ProductComponent {
     this.submitted = true;
     if(this.form.invalid) return;
     this.submitted = false;
-
+    /* valida si se está registrando o actualizando una categoria
+    if(this.productUpdate == 0){
+      this.onSubmitCreate();
+    }else{
+      this.onSubmitUpdate();
+    }*/
+    
     this.productService.createProduct(this.form.value).subscribe({
       next: (v) => {
         this.swal.successMessage(v.message); // show message
@@ -147,5 +153,11 @@ export class ProductComponent {
 
   hideModalForm(){
     $("#modalForm").modal("hide");
+  }
+
+  resetVariables(){
+    this.form.reset();
+    this.submitted = false;
+    this.productUpdate = 0;
   }
 }
