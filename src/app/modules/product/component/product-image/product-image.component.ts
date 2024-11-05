@@ -198,16 +198,16 @@ export class ProductImageComponent {
     this.productUpdate = 0;
   }
 
-  updateProduct(product : Product){
+  updateProduct(){
     this.resetVariables();
     this.showModalForm();
 
-    this.productUpdate = product.product_id;
-    this.form.controls['product'].setValue(product.product);
-    this.form.controls['gtin'].setValue(product.gtin);
-    this.form.controls['descripcion'].setValue(product.description);
-    this.form.controls['price'].setValue(product.price);
-    this.form.controls['stock'].setValue(product.stock);
-    this.form.controls['category_id'].setValue(product.category_id);
+    this.productUpdate = this.product.product_id;
+    this.form.controls['product'].setValue(this.product.product);
+    this.form.controls['gtin'].setValue(this.product.gtin);
+    this.form.controls['description'].setValue(this.product.description);
+    this.form.controls['price'].setValue(this.product.price);
+    this.form.controls['stock'].setValue(this.product.stock);
+    this.form.controls['category_id'].setValue(this.product.category_id);
   }
 }
