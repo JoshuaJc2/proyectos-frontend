@@ -10,7 +10,7 @@
             </div>
 
             <div class="col-md">
-                <span class="btn btn-primary btn-new" (click)="updateProduct(product)">
+                <span class="btn btn-primary btn-new" (click)="updateProduct()">
                     <i class="ph ph-note-pencil icon-text-button"></i>
                     Editar producto
                 </span>
@@ -61,13 +61,13 @@
                         data-ride="carousel">                        
                         <div class="carousel-inner">
                             <div *ngIf="productImages.length == 0" class="carousel-item active">
-                                <img src="assets/no-product-image.png" class="d-block w-100" alt="...">
+                                <img src="assets/no-product-image.jpg" class="d-block w-100" alt="...">
                             </div>
                             <div *ngFor="let prod of productImages" class="carousel-item active">
                                 <div class="carousel-del">
                                     <a (click)="deleteProductImage(prod.product_image_id)" class="trash"><i class="fas fa-trash-alt cursor-pointer"></i>Eliminar Imagen</a>
                                 </div>
-                                <img src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image.png'}}"
+                                <img src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image.jpg'}}"
                                     class="d-block w-100" alt="...">
                             </div>
                         </div>
