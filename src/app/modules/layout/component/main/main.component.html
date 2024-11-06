@@ -1,22 +1,24 @@
 <header class="bg-primary">
     <div class="container px-4 px-lg-5 py-5">
         <div class="text-center">
-            <h1 class="text-white display-4 fw-footer">Shop</h1>
-            <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+            <h1 class="text-white display-1 fw-footer">{{category}}</h1>
+            <p class="lead fw-normal text-white-50 mb-0">En esta sección pordras comprar {{category}}</p>
         </div>
     </div>
 </header>
-
 <body class="container">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <div class="col mb-5">
+            <div class="col mb-5" *ngFor="let product of products">
+                <!-- Card -->
                 <div class="card h-100">
-                    <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." class="card-img-top">
+                    <a>
+                        <img src="{{product.image !== '' ? product.image : '/assets/no-product-image.jpg'}}" alt="..." class="card-img-top">
+                    </a>
                     <div class="card-body p-4">
                         <div class="text-center">
-                            <h5 class="fw-bolder">FancyProduct</h5>
-                            $40.00 - $80.00
+                            <h5 class="fw-bolder">{{product.product}}</h5>
+                            <p>{{product.price | currency }}</p>
                         </div>
                     </div>
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -25,6 +27,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

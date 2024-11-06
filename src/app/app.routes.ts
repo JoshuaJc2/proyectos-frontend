@@ -14,7 +14,12 @@ import { InvoiceComponent } from './modules/invoice/component/invoice/invoice.co
 
 export const routes: Routes = [
     {
-        path:"",
+        path:"", 
+        redirectTo: 'main/:id', 
+        pathMatch: 'full'
+    },
+    {
+        path:"main/:id",
         component : MainComponent
     },
     {path: "categoria",
