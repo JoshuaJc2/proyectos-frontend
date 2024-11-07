@@ -24,15 +24,12 @@ export class MainComponent {
   constructor(
     private productService : ProductService,
     private route : ActivatedRoute,
+    private router : Router,
     private categoryService : CategoryService
   ){}
 
   ngOnInit(){
-    //this.category_id = this.route.snapshot.params['id']!;
-    //console.log(this.category_id);
-    //if(this.category_id){
     this.getProductos();
-    //}
   }
 
   getProductos(){
@@ -85,7 +82,7 @@ export class MainComponent {
     });
   }
 
-  resetVariables(){
-    this.category_id = 0; 
+  showProductDetail(gtin : String){
+    this.router.navigate(['detail/' + gtin]);
   }
 }
