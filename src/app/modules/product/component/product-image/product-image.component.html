@@ -2,19 +2,27 @@
     <div class="card">
     <div class="card-header">
         <div class="row">
+            @if (isAdmin) {
             <div class="col-md">
-                <span class="btn-return btn btn-secondary" (click)="redirect('producto')">
+                <span class="btn-return btn btn-outline-primary" (click)="redirectAdmin('producto')">
                     <i class="ph ph-arrow-circle-left icon-text-button"></i>
                     Regresar
                 </span>
             </div>
-
             <div class="col-md">
                 <span class="btn btn-primary btn-new" (click)="updateProduct()">
                     <i class="ph ph-note-pencil icon-text-button"></i>
                     Editar producto
                 </span>
             </div>
+            } @else {
+                <div class="col-md">
+                    <span class="btn-return btn btn-outline-primary" (click)="redirect(product.category_id)">
+                        <i class="ph ph-arrow-circle-left icon-text-button"></i>
+                        Regresar
+                    </span>
+                </div>
+            }
         </div>
     </div>
     <br>
@@ -37,11 +45,15 @@
                         <div class="carousel-inner">
                             <div *ngFor="let prod of productImages; let i = index" class="carousel-item"
                                 [class.active]="i === 0">
-                                <div class="carousel-del">
-                                    <a (click)="deleteProductImage(prod.product_image_id)" class="trash">
-                                        <i class="fas fa-trash-alt cursor-pointer">Eliminar Imagen</i>
-                                    </a>
-                                </div>
+
+                                @if(isAdmin == true){
+                                    <div class="carousel-del">
+                                        <a (click)="deleteProductImage(prod.product_image_id)" class="trash">
+                                            <i class="fas fa-trash-alt cursor-pointer">Eliminar Imagen</i>
+                                        </a>
+                                    </div>
+                                }
+
                                 <img src="{{ prod.image !== '' ? prod.image : '/assets/no-product-image.jpg'}}"
                                     class=" d-block w-100" alt="...">
                             </div>
@@ -64,14 +76,17 @@
                                 <img src="assets/no-product-image.jpg" class="d-block w-100" alt="...">
                             </div>
                             <div *ngFor="let prod of productImages" class="carousel-item active">
-                                <div class="carousel-del">
-                                    <a (click)="deleteProductImage(prod.product_image_id)" class="trash"><i class="fas fa-trash-alt cursor-pointer"></i>Eliminar Imagen</a>
-                                </div>
+                                @if(isAdmin){
+                                    <div class="carousel-del">
+                                        <a (click)="deleteProductImage(prod.product_image_id)" class="trash"><i class="fas fa-trash-alt cursor-pointer"></i>Eliminar Imagen</a>
+                                    </div>
+                                }
                                 <img src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image.jpg'}}"
                                     class="d-block w-100" alt="...">
                             </div>
                         </div>
                     </div>
+                    @if(isAdmin){
                     <div class="edit-product-image text-center">
                         <label for="uploadImage" class="cursor-pointer">
                             <br>
@@ -81,6 +96,7 @@
                             Agregar imagen
                         </label>
                     </div>
+                    }
                 </div>
             </div>
 
@@ -113,14 +129,18 @@
 
                                 <!-- price -->
                                 <tr>
-                                    <th class="col-md-4">Precio</th>
-                                    <td>{{ product.price }}</td>
+                                    <th class="col-md-4">Precio por unidad</th>
+                                    <td>{{ product.price | currency}}</td>
                                 </tr>
 
                                 <!-- stock -->
                                 <tr>
-                                    <th class="col-md-4">Stock</th>
-                                    <td>{{ product.stock }}</td>
+                                    <th class="col-md-4">Disponibles</th>
+                                    @if(product.stock > 0){
+                                        <td>{{ product.stock }}</td>
+                                    } @else {
+                                        <td>No hay unidades disponibles</td>
+                                    }
                                 </tr>
 
                                 <!-- category_id -->
@@ -128,12 +148,25 @@
                                     <th class="col-md-4">Categoría</th>
                                     <td>{{ product.category }}</td>
                                 </tr>
+                                @if(isAdmin == false){
+                                <tr>
+                                    <th>
+                                        <label for="quantity">Cantidad (entre 1 y {{product.stock}}):</label>
+                                        <input type="number" id="quantity" name="quantity" min="1" max="{{product.stock}}">
+                                    </th>
+                                    <td>
+                                        <span class="btn btn-success btn-new" (click)="addToCart({'gtin' : product.gtin, 'quantity' : 1})">
+                                            <i class="ph ph-note-pencil icon-text-button" ></i>
+                                            Agregar al carrito
+                                        </span>
+                                    </td>
+                                </tr>
+                                }
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -145,9 +178,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Editar producto</h5>
-                    <!--<button type="button" class="modal-close-button" data-bs-dismiss="modal" aria-label="Close">
-                        <span class="modal-close-button-x">&times;</span>
-                    </button>-->
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
                 </div>

@@ -12,7 +12,6 @@ import { CustomerComponent } from './modules/customer/component/customer/custome
 import { CustomerImageComponent } from './modules/customer/component/customer-image/customer-image.component';
 import { InvoiceComponent } from './modules/invoice/component/invoice/invoice.component';
 import { HomeComponent } from './modules/layout/component/home/home.component';
-import { DetailProductComponent } from './modules/product/component/detail-product/detail-product.component';
 
 export const routes: Routes = [
     {
@@ -33,10 +32,6 @@ export const routes: Routes = [
     {
         path:"producto/:gtin",
         component : ProductImageComponent
-    },
-    {
-        path:"detail/:gtin",
-        component : DetailProductComponent
     },
     {
         path: 'login',

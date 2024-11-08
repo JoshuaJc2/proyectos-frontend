@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../../../product/_service/product.service';
-import { DtoProductList } from '../../../product/_dto/dto-product-list';
 import { SwalMessages } from '../../../../shared/swal-messages';
 import { SharedModule } from '../../../../shared/shared-module';
 import { DtoProductCategoryList } from '../../../product/_dto/dto-product-category-list';
@@ -83,6 +82,6 @@ export class MainComponent {
   }
 
   showProductDetail(gtin : String){
-    this.router.navigate(['detail/' + gtin]);
+    this.router.navigate(['producto/' + gtin]);
   }
 }
