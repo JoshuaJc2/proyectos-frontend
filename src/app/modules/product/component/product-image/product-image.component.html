@@ -148,22 +148,20 @@
                                     <th class="col-md-4">Categoría</th>
                                     <td>{{ product.category }}</td>
                                 </tr>
-                                @if(isAdmin == false){
-                                <tr>
-                                    <th>
-                                        <label for="quantity">Cantidad (entre 1 y {{product.stock}}):</label>
-                                        <input type="number" id="quantity" name="quantity" min="1" max="{{product.stock}}">
-                                    </th>
-                                    <td>
-                                        <span class="btn btn-success btn-new" (click)="addToCart({'gtin' : product.gtin, 'quantity' : 1})">
-                                            <i class="ph ph-note-pencil icon-text-button" ></i>
-                                            Agregar al carrito
-                                        </span>
-                                    </td>
-                                </tr>
-                                }
                             </tbody>
                         </table>
+                        @if(isAdmin == false && product.stock > 0){
+                            <label for="product-quantity">Cantidad (Max {{product.stock}}): </label>
+                            <input type="number" id="product-quantity" name="product-quantity" [(ngModel)]="quantity" min="1" max="{{product.stock}}">
+                            <span class="btn btn-success btn-new" (click)="addToCart({'gtin' : product.gtin, 'quantity' : quantity})">
+                                <i class="ph ph-shopping-cart icon-text-button" ></i>
+                                    Agregar al carrito
+                            </span>
+                            } @else {
+                                @if(isAdmin == false){
+                                    <h4 class="text-danger text-center">Lo sentimos, por el momento no hay stock disponible de este producto.</h4>
+                                }
+                            }
                     </div>
                 </div>
             </div>

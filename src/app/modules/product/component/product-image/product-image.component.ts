@@ -35,6 +35,7 @@ export class ProductImageComponent {
   productUpdate : number = 0;
   loggedIn = false;
   isAdmin = false;
+  quantity = 0;
   
   constructor(
     private route : ActivatedRoute,
@@ -132,7 +133,7 @@ export class ProductImageComponent {
       },
       error: (e) => {
         console.log(e);
-        this.swal.errorMessage("No se pudo actualizar la categoria");
+        this.swal.errorMessage("No se pudo actualizar el producto");
       }
     });
   }
@@ -234,24 +235,44 @@ export class ProductImageComponent {
   }
 
   addToCart(cart : any){
+    console.log(cart);
     if(this.loggedIn == false){
       this.swal.errorMessage("Lo sentimos, primero debe iniciar sesión o registrarse");
     } else {
-      this.loading = true;
-      this.cartService.addToCart(cart).subscribe({
-        next : (v) => {
+      if(cart.quantity > this.product.stock || this.quantity <= 0){
+        this.swal.errorMessage("Seleccione una cantidad valida")
+      } else {
+        this.product.stock -= cart.quantity;
+        console.log(this.product); 
+        this.loading = true;
+        this.cartService.addToCart(cart).subscribe({
+          next : (v) => {
           this.loading = false;
-          this.swal.successMessage(v);
+          this.swal.successMessage('Producto añadido correctamente');
           this.getCart();
-          this.getProduct();
-        },
-        error: (e) => {
-          //console.log(e);
+          //this.updateProductStock(this.product.gtin, this.product.stock);
+          },
+          error: (e) => {
           this.swal.errorMessage(e.error!.message);
           this.loading = false;
-        }
-      });
+          }
+        });
+      }
     }
+  }
+
+  updateProductStock(gtin: String, quantity : number){
+    this.productService.updateProductStock(gtin, quantity).subscribe({
+      next : v => {
+        this.getProduct();
+        this.swal.successMessage(v.message);
+
+      },
+      error : e => {
+        console.log(e);
+        this.swal.errorMessage(e.error!.message);  
+      }
+    });
   }
 
   resetVariables(){

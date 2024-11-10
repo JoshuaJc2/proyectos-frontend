@@ -1,5 +1,5 @@
 header.masthead {
-    height: 93vh;
+    height: 30vh;
     padding-top: 6rem + 4.5rem;
     padding-bottom: 6rem;
     text-align: center;
@@ -12,16 +12,16 @@ header.masthead {
     background-size: cover;
 
     .masthead-subheading {
-        font-size: 2.5rem;
-        line-height: 1.5rem;
+        font-size: 2.75rem;
+        line-height: 2rem;
         margin-bottom: 25px;
     }
 
     .masthead-heading {
-        font-size: 3.25rem;
+        font-size: 2.25rem;
         font-weight: 700;
-        line-height: 3.25rem;
-        margin-bottom: 2rem;
+        line-height: 2.5rem;
+        margin-bottom: 0.8rem;
     }
     
     

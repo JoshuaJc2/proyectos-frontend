@@ -17,7 +17,7 @@ export class MainComponent {
   category_id : number = -1;
   loading = false;
   products : DtoProductCategoryList[] = [];
-  swal : SwalMessages = new SwalMessages
+  swal : SwalMessages = new SwalMessages ();
   category : string = '';
 
   constructor(
@@ -61,11 +61,10 @@ export class MainComponent {
         console.log(e);
         this.swal.errorMessage(e.error!.message); // show message
       }
-    })
+    });
   }
 
   getProductsById(){
-    let aux = this.category_id;
     this.loading = true;
     this.productService.getProductByCategory(this.category_id).subscribe({
       next: (v) => {
