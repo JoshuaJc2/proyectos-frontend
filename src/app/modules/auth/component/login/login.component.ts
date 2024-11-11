@@ -50,7 +50,7 @@ export class LoginComponent {
             const token = response.body.token;
             this.authenticationService.saveToken(token);
             this.authenticationService.addUserToLocalCache(response.body);
-            this.router.navigateByUrl('/secured');
+            //this.router.navigateByUrl('/secured');
             window.location.reload();
             this.showLoading = false; 
           }else{
