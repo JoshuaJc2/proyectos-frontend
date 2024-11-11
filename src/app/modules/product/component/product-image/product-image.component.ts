@@ -242,15 +242,12 @@ export class ProductImageComponent {
       if(cart.quantity > this.product.stock || this.quantity <= 0){
         this.swal.errorMessage("Seleccione una cantidad valida")
       } else {
-        this.product.stock -= cart.quantity;
-        console.log(this.product); 
         this.loading = true;
         this.cartService.addToCart(cart).subscribe({
           next : (v) => {
           this.loading = false;
           this.swal.successMessage('Producto añadido correctamente');
           this.getCart();
-          //this.updateProductStock(this.product.gtin, this.product.stock);
           },
           error: (e) => {
           this.swal.errorMessage(e.error!.message);
@@ -259,20 +256,6 @@ export class ProductImageComponent {
         });
       }
     }
-  }
-
-  updateProductStock(gtin: String, quantity : number){
-    this.productService.updateProductStock(gtin, quantity).subscribe({
-      next : v => {
-        this.getProduct();
-        this.swal.successMessage(v.message);
-
-      },
-      error : e => {
-        console.log(e);
-        this.swal.errorMessage(e.error!.message);  
-      }
-    });
   }
 
   resetVariables(){
