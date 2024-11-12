@@ -3,8 +3,7 @@ import { CartService } from '../../_service/cart.service';
 import { Cart } from '../../_model/cart';
 import { SharedModule } from '../../../../shared/shared-module';
 import { SwalMessages } from '../../../../shared/swal-messages';
-
-declare var $ : any;
+import { InvoiceService } from '../../_service/invoice.service';
 
 @Component({
   selector: 'app-cart',
@@ -20,7 +19,8 @@ export class CartComponent {
   total : number = 0;
 
   constructor(
-    private cartService : CartService
+    private cartService : CartService,
+    private invoiceService : InvoiceService
   ){}
 
   ngOnInit(){
@@ -33,10 +33,11 @@ export class CartComponent {
       next: (v) => {
         console.log(v);
         this.cart = v;
-        this.loading= false;
+        //this.total = 0;
         this.cart.forEach(item => {
           this.total += item.product.price * item.quantity;
         });
+        this.loading= false;
         console.log(this.total);
       },
       error: (e) => {
@@ -89,11 +90,24 @@ export class CartComponent {
     });
   }
 
-  showModalForm(){
-    $("#modalForm").modal("show");
-  }
-
-  hideModalForm(){
-    $("#modalForm").modal("hide");
+  generateInvoice(){
+    this.swal.confirmMessage.fire({
+      title : "Favor de confirmar la compra",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.invoiceService.generateInvoice().subscribe({
+          next : (v) => {
+            console.log(v);
+            this.swal.successMessage(v.message);
+            this.total = 0;
+            this.getCart();
+          },
+          error : (e) =>{
+            console.log(e);
+            this.swal.errorMessage(e.error!.message);
+          }
+        });
+      }
+    });
   }
 }

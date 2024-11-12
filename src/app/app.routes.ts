@@ -13,6 +13,7 @@ import { CustomerImageComponent } from './modules/customer/component/customer-im
 import { InvoiceComponent } from './modules/invoice/component/invoice/invoice.component';
 import { HomeComponent } from './modules/layout/component/home/home.component';
 import { CartComponent } from './modules/invoice/component/cart/cart.component';
+import { InvoiceDetailComponent } from './modules/invoice/component/invoice-detail/invoice-detail.component';
 
 export const routes: Routes = [
     {
@@ -62,6 +63,10 @@ export const routes: Routes = [
     {
         path: 'invoice',
         component: InvoiceComponent
+    },
+    {
+        path : 'invoice/:id',
+        component : InvoiceDetailComponent
     },
     {
         path: 'cart',
