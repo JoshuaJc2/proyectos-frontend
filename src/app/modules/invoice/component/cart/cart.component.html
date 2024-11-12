@@ -1,0 +1,106 @@
+<div class="body-content">
+<div class="card">
+    <div class="card-header">
+        <h4>Mi Carrito</h4>
+    </div>
+    <div class="card-body">
+        @if(cart.length != 0){
+        <div class="row">
+            <div class="col">
+            <table class="table text-center table-secondary">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Más</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for(elemento of cart; track elemento.cart_id; let i = $index ) {
+                        <tr>
+                            <td>
+                                <img src="{{elemento.image !== 'data:image/png;base64,' ? elemento.image : 'assets/no-product-image.jpg'}}" alt="..." class="card-img-top">
+                                <p class="text-uppercase">{{ elemento.product.product }}</p>
+                            </td>
+                            <td>{{ elemento.product.price | currency }}</td>
+                            <td>{{ elemento.quantity }}</td>
+                            <td>{{ elemento.product.price * elemento.quantity | currency }}</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-danger d-flex align-items-center icon-button" (click)="removeFromCart(elemento.cart_id)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-trash me-2 trash-icon" viewBox="0 0 16 16">
+                                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                      <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                    </svg>
+                                    Eliminar
+                                </button>   
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-danger d-flex align-items-center boton-vaciar" (click)="clearCart()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-trash me-2 trash-icon-vac" viewBox="0 0 16 16">
+                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                </svg>
+                Vaciar carrito
+            </button>  
+            </div>
+            <div class="col">
+                <div class="card border-secondary">
+                <table class="table table-secondary">
+                    <tbody>
+                        @for(elemento of cart; track elemento.cart_id; let i = $index ){
+                        <tr>
+                            <th class="text-secondary-emphasis">
+                                {{elemento.product.product}} x {{elemento.quantity}}
+                            </th>
+                            <td>
+                                {{elemento.product.price * elemento.quantity | currency}}
+                            </td>
+                        </tr>
+                        }
+                        <tr>
+                            <th>
+                                Total
+                            </th>
+                            <td class="text-info">
+                                {{total | currency}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-primary" (click)="showModalForm()">Finalizar compra</button>
+                </div>
+            </div>
+        </div>
+        } @else {
+            <div class="text-center table-empty">
+                <h4>No cuentas con productos en tu carrito</h4>
+            </div>
+        }
+    </div>
+    <div class="card-footer"></div>
+    <div class="modal fade" data-bs-backdrop="static" tabindex="-1" role="dialog" id="modalForm">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">Save changes</button>
+              <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+</div>

@@ -12,6 +12,7 @@ import { CustomerComponent } from './modules/customer/component/customer/custome
 import { CustomerImageComponent } from './modules/customer/component/customer-image/customer-image.component';
 import { InvoiceComponent } from './modules/invoice/component/invoice/invoice.component';
 import { HomeComponent } from './modules/layout/component/home/home.component';
+import { CartComponent } from './modules/invoice/component/cart/cart.component';
 
 export const routes: Routes = [
     {
@@ -61,6 +62,9 @@ export const routes: Routes = [
     {
         path: 'invoice',
         component: InvoiceComponent
+    },
+    {
+        path: 'cart',
+        component: CartComponent
     }
-
 ]

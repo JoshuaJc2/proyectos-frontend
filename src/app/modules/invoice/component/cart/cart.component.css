@@ -1,0 +1,17 @@
+img{
+    width: 150px;
+    border-radius: 15%;
+}
+
+.icon-button:hover .trash-icon{
+    fill: white;
+}
+
+.boton-vaciar{
+    float: right;
+    margin: 0;
+}
+
+.text-info{
+    font-weight: bold;
+}

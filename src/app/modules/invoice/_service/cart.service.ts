@@ -28,5 +28,7 @@ export class CartService {
   }
 
   /* REQUERIMIENTO 4. Implementar servicio Cart - función removeFromCart() */
-  removeFromCart() {}
+  removeFromCart(id : number) : Observable<any>{
+    return this.http.delete(api_dwb_uri + this.source + "/" + id);
+  }
 }
