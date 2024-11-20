@@ -21,7 +21,7 @@ export class CategoryComponent {
   swal: SwalMessages = new SwalMessages(); // swal messages
   submitted = false;
   categoryUpdate:number = 0;
-
+  current_date = new Date(); // hora y fecha actual
   loading = false;
 
   constructor(
@@ -41,6 +41,7 @@ export class CategoryComponent {
         console.log(v);
         this.categories = v;
         this.loading= false;
+        this.current_date = new Date();
       },
       error: (e) => {
         console.log(e);
@@ -113,14 +114,6 @@ export class CategoryComponent {
     }else{
       this.onSubmitUpdate();
     }
-    /*
-    this.submitted = false;
-    let id = this.categories.length + 1;
-    let nuevaCat = new Category(id, this.form.controls['category'].value!, this.form.controls['tag'].value!, 1);
-    this.categories.push(nuevaCat);
-    this.hideModalForm();
-    //alert("La categoria ha sido registrada");
-    this.swal.successMessage("La categoria ha sido registrada"); // show message*/
   }
 
   onSubmitCreate(){

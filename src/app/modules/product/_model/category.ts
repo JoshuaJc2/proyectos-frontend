@@ -4,10 +4,10 @@ export class Category{
 	tag : String = '';
 	status : number = 0;
 
-	constructor(category_id : number, category : String, tag : String, status : number){
+	/*constructor(category_id : number, category : String, tag : String, status : number){
 		this.category_id = category_id;
 		this.category = category;
 		this.tag = tag;
 		this.status = status;
-	}
+	}*/
 }

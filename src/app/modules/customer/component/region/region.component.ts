@@ -21,6 +21,7 @@ export class RegionComponent {
   submitted = false;
   regionUpdate:number = 0;
   loading = false;
+  current_date = new Date();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -81,6 +82,7 @@ export class RegionComponent {
         console.log(v);
         this.regions = v;
         this.loading = false;
+        this.current_date = new Date();
       },
       error: (e) => {
         console.error(e);

@@ -25,6 +25,7 @@ export class ProductComponent {
   swal: SwalMessages = new SwalMessages(); // swal messages
   submitted = false;
   productUpdate:number = 0;
+  current_date = new Date();
   loading = false;
 
   constructor(
@@ -93,7 +94,7 @@ export class ProductComponent {
       next: (v) => {
         this.products = v;
         this.loading = false;
-        // this.current_date = new Date();
+        this.current_date = new Date();
       },
       error: (e) => {
         this.loading = false;
@@ -120,12 +121,6 @@ export class ProductComponent {
     this.submitted = true;
     if(this.form.invalid) return;
     this.submitted = false;
-    /* valida si se está registrando o actualizando una categoria
-    if(this.productUpdate == 0){
-      this.onSubmitCreate();
-    }else{
-      this.onSubmitUpdate();
-    }*/
     
     this.productService.createProduct(this.form.value).subscribe({
       next: (v) => {

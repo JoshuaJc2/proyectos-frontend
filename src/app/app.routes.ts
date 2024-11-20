@@ -10,10 +10,16 @@ import { MainComponent } from './modules/layout/component/main/main.component';
 import { RegionComponent } from './modules/customer/component/region/region.component';
 import { CustomerComponent } from './modules/customer/component/customer/customer.component';
 import { CustomerImageComponent } from './modules/customer/component/customer-image/customer-image.component';
+import { InvoiceComponent } from './modules/invoice/component/invoice/invoice.component';
+import { HomeComponent } from './modules/layout/component/home/home.component';
 
 export const routes: Routes = [
     {
-        path:"",
+        path:"", 
+        component : HomeComponent
+    },
+    {
+        path:"main/:id",
         component : MainComponent
     },
     {path: "categoria",
@@ -51,6 +57,10 @@ export const routes: Routes = [
     {
         path: 'cliente/:rfc',
         component: CustomerImageComponent
+    },
+    {
+        path: 'invoice',
+        component: InvoiceComponent
     }
 
 ]
