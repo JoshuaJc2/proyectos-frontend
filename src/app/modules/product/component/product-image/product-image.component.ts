@@ -12,6 +12,7 @@ import { CategoryService } from '../../_service/category.service';
 import { Category } from '../../_model/category';
 import { CartService } from '../../../invoice/_service/cart.service';
 import { Cart } from '../../../invoice/_model/cart';
+import { NavigationService } from '../../../layout/_service/navigation.service';
 
 declare var $ : any;
 
@@ -45,7 +46,8 @@ export class ProductImageComponent {
     private cartService: CartService,
     private ngxService : NgxPhotoEditorService,
     private router : Router,
-    private formBuilder : FormBuilder
+    private formBuilder : FormBuilder,
+    public navigation : NavigationService
   ){ 
     // Product form
   this.form = this.formBuilder.group({
@@ -56,6 +58,7 @@ export class ProductImageComponent {
     stock: [0, [Validators.required, Validators.pattern('^[0-9]*$')]],
     category_id: [0, [Validators.required]],
   });
+    this.navigation.startSaveHistory();
   }
 
   ngOnInit(){
@@ -239,8 +242,8 @@ export class ProductImageComponent {
     if(this.loggedIn == false){
       this.swal.errorMessage("Lo sentimos, primero debe iniciar sesión o registrarse");
     } else {
-      if(cart.quantity > this.product.stock || this.quantity <= 0){
-        this.swal.errorMessage("Seleccione una cantidad valida")
+      if(cart.quantity > this.product.stock || cart.quantity <= 0){
+        this.swal.errorMessage("Seleccione una cantidad entre 1 y " + this.product.stock);
       } else {
         this.loading = true;
         this.cartService.addToCart(cart).subscribe({

@@ -4,7 +4,7 @@
         <div class="row">
             @if (isAdmin) {
             <div class="col-md">
-                <span class="btn-return btn btn-outline-primary" (click)="redirectAdmin('producto')">
+                <span class="btn-return btn btn-outline-primary" (click)="navigation.goBack()">
                     <i class="ph ph-arrow-circle-left icon-text-button"></i>
                     Regresar
                 </span>
@@ -17,7 +17,7 @@
             </div>
             } @else {
                 <div class="col-md">
-                    <span class="btn-return btn btn-outline-primary" (click)="redirect(product.category_id)">
+                    <span class="btn-return btn btn-outline-primary" (click)="navigation.goBack()">
                         <i class="ph ph-arrow-circle-left icon-text-button"></i>
                         Regresar
                     </span>
@@ -111,37 +111,33 @@
                         <div class="product-title">
                             {{ product.product }}
                         </div>
+                        
+                        <!-- gtin -->
+                        <div>
+                            <p>Codigo del producto: {{product.gtin}}</p>
+                        </div>
+
+                        <!-- price -->
+                        <div>
+                            <!--<th class="col-md-4">Precio por unidad</th>-->
+                            <h1 class="text-info">{{ product.price | currency}}</h1>
+                        </div>
 
                         <table class="table">
                             <tbody>
-
-                                <!-- gtin -->
-                                <tr>
-                                    <th class="col-md-4">GTIN</th>
-                                    <td>{{ product.gtin }}</td>
-                                </tr>
-
                                 <!-- description -->
                                 <tr>
                                     <th class="col-md-4">Descripción</th>
                                     <td>{{ product.description }}</td>
                                 </tr>
 
-                                <!-- price -->
-                                <tr>
-                                    <th class="col-md-4">Precio por unidad</th>
-                                    <td>{{ product.price | currency}}</td>
-                                </tr>
-
                                 <!-- stock -->
+                                @if(product.stock > 0){
                                 <tr>
                                     <th class="col-md-4">Disponibles</th>
-                                    @if(product.stock > 0){
                                         <td>{{ product.stock }}</td>
-                                    } @else {
-                                        <td>No hay unidades disponibles</td>
-                                    }
                                 </tr>
+                                }
 
                                 <!-- category_id -->
                                 <tr>
@@ -159,7 +155,7 @@
                             </span>
                             } @else {
                                 @if(isAdmin == false){
-                                    <h4 class="text-danger text-center">Lo sentimos, por el momento no hay stock disponible de este producto.</h4>
+                                    <h4 class="text-danger">Agotado, proximo reabastecimiento</h4>
                                 }
                             }
                     </div>

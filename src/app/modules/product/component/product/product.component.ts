@@ -14,7 +14,7 @@ declare var $:any; // Variable de JQuery
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [SharedModule, ProductImageComponent],
+  imports: [SharedModule],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
