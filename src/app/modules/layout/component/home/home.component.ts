@@ -54,6 +54,7 @@ export class HomeComponent {
       next: (v) => {
         this.loading= false;
         this.products = [... this.products, ... v.filter((value: { status: number; }) => value.status == 1)];
+        console.log(this.products);
       },
       error: (e) => {
         this.loading = false;

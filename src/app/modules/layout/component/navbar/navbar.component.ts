@@ -7,6 +7,7 @@ import { LoginComponent } from "../../../auth/component/login/login.component";
 import { RegisterComponent } from "../../../auth/component/register/register.component";
 import { SharedModule } from '../../../../shared/shared-module';
 import { Router } from '@angular/router';
+import { Customer } from '../../../customer/_model/customer';
 
 declare var $: any; // JQuery
 
@@ -19,7 +20,7 @@ declare var $: any; // JQuery
 })
 export class NavbarComponent {
   categories: Category[] = []; // categories list
-
+  cliente = new Customer();
   loggedIn = false;
   isAdmin = false;
 
@@ -77,5 +78,9 @@ export class NavbarComponent {
 
   showProductsByCategory(category_id : number){
     this.router.navigate(['main/' + category_id]);
+  }
+
+  showCart(){
+    this.router.navigate(['cart/']);
   }
 }

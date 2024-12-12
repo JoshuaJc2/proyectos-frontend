@@ -1,9 +1,11 @@
 <div class="body-content">
-    <div class="card border-primary">
-    <div class="card-header border-primary">
-        <div class="btn-return" (click)="redirect('cliente')">
-            <i class="ph ph-arrow-circle-left"></i>
-            Regresar
+    <div class="card">
+    <div class="card-header">
+        <div class="col-md" (click)="redirect('cliente')">
+            <span class="btn-return btn btn-outline-primary" (click)="redirect('cliente')">
+                <i class="ph ph-arrow-circle-left icon-text-button"></i>
+                Regresar
+            </span>
         </div>
     </div>
 
@@ -15,7 +17,7 @@
             <!-- customer image  -->
    
             <div class="col-md-4">
-                <div class="card border-light">
+                <div class="card">
 
 
                 <!-- image  -->
@@ -41,7 +43,7 @@
         <!-- customer data  -->
    
         <div class="col-md-8">
-            <div class="card border-primary">
+            <div class="card">
                 <div class="card-body-customer">
 
 
