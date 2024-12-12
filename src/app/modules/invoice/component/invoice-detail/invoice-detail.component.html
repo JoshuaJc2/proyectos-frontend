@@ -1,0 +1,265 @@
+<div class="body-content">
+    <div class="card">
+        <div class="card-header">
+            <div class="col-md">
+                <span class="btn-return btn btn-outline-primary" routerLink="/invoice">
+                    <i class="ph ph-arrow-circle-left icon-text-button"></i>
+                    Regresar
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="container">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    RFC emisor:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    UNAM231128FAC
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Nombre emisor:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    Desarrollo Web Frontend 2025-1
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    RFC receptor:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    {{invoice.rfc}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Nombre receptor:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    {{customer.name}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Régimen fiscal:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    General ley personas morales
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Uso CFDI:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    Gastos en general
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col">
+                <div class="container">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Folio fiscal:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    {{invoice.invoice_id}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Nombre emisor:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    Desarrollo Web Frontend 2025-1
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    No. serie CSD:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    0000100000051613241
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Fecha emisión:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    {{invoice.created_at | date: 'dd/MM/yyyy'}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Hora emisión:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    {{invoice.created_at | date: 'h:mm a'}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Efecto de comprobante:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    ingreso
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="py-3"></div>
+        <table class="table text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>No.</th>
+                    <th>Gtin</th>
+                    <th>Cantidad</th>
+                    <th>Costo unitario</th>
+                    <th>Subtotal</th>
+                    <th>Impuestos</th>
+                    <th>Importe total</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for(product of invoice.items; track product.item_id; let i = $index){
+                    <tr>
+                        <td>
+                            {{product.item_id}}
+                        </td>
+                        <td>
+                            {{product.gtin}}
+                        </td>
+                        <td>
+                            {{product.quantity}}
+                        </td>
+                        <td>
+                            {{product.unit_price | currency}}
+                        </td>
+                        <td>
+                            {{product.subtotal | currency}}
+                        </td>
+                        <td>
+                            {{product.taxes | currency}}
+                        </td>
+                        <td>
+                            {{product.total | currency}}
+                        </td>
+                    </tr>
+                }
+              </tbody>
+        </table>
+        <div class="row">
+            <div class="col">
+                <div class="container">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Total de articulos:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    {{totalitems}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Exportación:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    No aplica
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Objeto impuesto:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    Sí, objeto impuesto
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col">
+                <div class="container">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Moneda:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    Peso mexicano
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Forma de pago:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    Tajeta de crédito bancaria
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Método de pago:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    Pago en una sola exhibición
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col">
+                <div class="container">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Subtotal:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    {{subtotal | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Impuestos:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td>
+                                    {{impuestos | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Total:&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <td class="total">
+                                    <h4>{{total | currency}}</h4>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

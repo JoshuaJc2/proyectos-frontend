@@ -1,0 +1,126 @@
+<body class="cuerpo">
+    <!-- body content  -->
+    <div class="body-content">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col">
+              <h4 class="title-cat">Regiones</h4>
+            </div>
+            <div class="col">
+              <div class="botonDer">
+                <button type="button" class="btn btn-primary btn-new" (click)="showModalForm()">
+                  <i class="ph ph-plus-circle"></i>
+                  Agregar Region
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          @if(regions.length == 0){
+            <div class="text-center table-empty">
+                <h4>No cuentas con Regiones registradas</h4>
+            </div>
+          }@else {
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">RegionId</th>
+                <th scope="col">Region</th>
+                <th scope="col">tag</th>
+                <th scope="col">status</th>
+                <th scope="col">more</th>
+              </tr>
+            </thead>
+            <tbody>
+                          @for(region of regions; track region.region_id; let i = $index ) {
+                      <tr>
+                      <td>{{ region.region_id }}</td>
+                      <td>{{ region.region }}</td>
+                      <td>{{ region.tag }}</td>
+                <td> @if (region.status){
+                  {{ "Activo" }}
+                  } @else {
+                    <span class="td-status-disable">{{ "Inactivo" }}</span>
+                  }</td>
+                  <td>
+                    <div class="dropdown">
+                      <!-- dots button  -->
+                      <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                      </button>
+  
+                      <!-- menu options -->
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" (click)="updateRegion(region)">
+                          <i class="ph ph-note-pencil icon-text-ul"></i>Editar
+                        </a>
+                        @if (region.status == 0) {
+                          <a class="dropdown-item enable-item" (click)="enableRegion(region.region_id)">
+                            <i class="ph ph-check-circle icon-text-ul"></i>Activar
+                          </a>
+                        }
+                        @if (region.status == 1) {
+                          <a class="dropdown-item disable-item" (click)="disbleRegion(region.region_id)">
+                            <i class="ph ph-x-circle icon-text-ul"></i>Desactivar
+                          </a>
+                        }
+                      </div>
+                    </div>
+                  </td>
+                      </tr>
+                          }
+            </tbody>
+          </table>
+        }
+        </div>
+        
+        <div class="modal fade modal-lg" id="modalForm" tabindex="-1" role="dialog" data-bs-backdrop="static">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Region</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+  
+              <div class="modal-body">
+  
+                <form [formGroup]="form" (ngSubmit)="onSubmit()"> <!--(ngSubmit)="onSubmit()"> <form>-->
+                  <div class="form-group">
+                    <label for="region" class="form-label">Region<span class="color-red">*</span></label>
+                    <input type="text" class="form-control" formControlName="region" id="region"
+                      placeholder="Nombre de la region..." [ngClass]="{'is-invalid': form.controls['region'].errors && submitted}">
+                    @if (form.controls['region'].errors && submitted) {
+                        <small class="input-error-message">Favor de ingresar un nombre de region válido</small>
+                   }
+                   
+                  </div>
+  
+                  <div class="form-group">
+                    <label for="tag">Tag<span class="color-red">*</span></label>
+                    <input type="text" class="form-control" formControlName="tag" id="tag"
+                      placeholder="Nombre de la etiqueta..." [ngClass]="{'is-invalid': form.controls['tag'].errors && submitted}">
+                    @if (form.controls['tag'].errors && submitted) {
+                        <small class="input-error-message">Favor de ingresar un código de region válido</small>
+                   }
+                   
+                  </div>
+                  
+                  <div class="form-button">
+                    <button type="submit" class="btn btn-primary btn-save">Agregar</button>
+                  </div>
+                </form>
+              
+              </div>
+  
+            </div>
+          </div>
+        </div>
+  
+        <div class="card-footer text-end">
+          <small>{{ current_date | date: 'dd/MMM/yyyy, h:mm a' }}</small>
+        </div>
+      </div>
+    </div>
+  </body>

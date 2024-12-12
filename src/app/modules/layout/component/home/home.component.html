@@ -1,0 +1,42 @@
+<header class="masthead">
+    <div class="container py-1">
+        <div class="py-4"></div>
+        <div class="masthead-subheading text-uppercase">Gen-Shop</div>
+        <div class="masthead-heading py-1 text-uppercase">Encuentra los mejores productos.</div>
+        <div class="lead fw-normal text-white-80">Tambien puedes buscar por categoria!</div>
+    </div>
+</header>
+
+<body class="container">
+    <div class="container px-4 px-lg-5 mt-5">
+        @if(products.length == 0){
+            <div class="text-center table-empty">
+                <h4>Lo sentimos, aun no hay productos registrados</h4>
+            </div>
+        } @else {
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="col mb-5" *ngFor="let product of products">
+                <!-- Card -->
+                <div class="card h-100">
+                    <a>
+                        <img src="{{product.image !== 'data:image/png;base64,' ? product.image : 'assets/no-product-image.jpg'}}" alt="..." class="card-img-top">
+                    </a>
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <h5 class="fw-bolder">{{product.product}}</h5>
+                            <h3 class="text-info">{{product.price | currency}}</h3>
+                        </div>
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a class="btn btn-outline-primary mt-auto" (click)="showProductDetail(product.gtin)">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+        }
+    </div>
+</body>

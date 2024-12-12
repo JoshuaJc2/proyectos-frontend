@@ -1,0 +1,42 @@
+/*.grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Create 2 columns and auto-place rows 
+    padding: auto;
+    margin: auto;
+}*/
+
+/* Product */
+
+.carousel-del{
+  display: flex;
+  justify-content: center;
+}
+
+.card-body-product{
+    padding: 16px;
+}
+  
+  .edit-product-image{
+    color: blue;
+    margin-bottom: 16px;
+  }
+
+  .cursor-pointer{
+    cursor: pointer;
+  }
+
+  .cursor-pointer:hover{
+    color:black;
+  }
+  
+  
+  .product-title{
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+  
+  
+  .btn-edith, .btn-delete{
+    width: 140px;
+    margin-right: 24px;
+  }
